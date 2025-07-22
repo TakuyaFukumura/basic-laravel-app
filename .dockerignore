@@ -1,0 +1,12 @@
+.git
+.gitignore
+README.md
+test-app.sh
+docker-entrypoint.sh
+vendor/
+node_modules/
+.env.backup
+.env.production
+.phpunit.result.cache
+storage/logs/*
+!storage/logs/.gitkeep
