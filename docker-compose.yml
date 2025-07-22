@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - APP_NAME=Laravel Hello World
+      - APP_ENV=production
+      - APP_KEY=base64:YhF8kFc6z1y3q4WyXh7EPhvOD1rw6wZU8RYzJF6YgQ4=
+      - APP_DEBUG=false
+      - APP_URL=http://localhost:8080
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/html/database/database.sqlite
+    volumes:
+      - ./database:/var/www/html/database
+    restart: unless-stopped
+
+# 開発用: PHPの組み込みサーバーでの実行
+# 使用方法: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+  dev:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html/public
+    command: php -S 0.0.0.0:8000 index.php
+    profiles:
+      - dev
